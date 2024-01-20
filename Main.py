@@ -7,8 +7,7 @@ pygame.init()
 
 pygame.mixer.init()
 
-pygame.mixer.music.load("C:\\Users\\fbarb\\Jogos\\JogoArcade\\assets\\arcade-171561.wav")
-
+pygame.mixer.music.load("assets\\arcade-171561.wav")
 
 is_sound_enabled = True
 is_hard_mode = False 

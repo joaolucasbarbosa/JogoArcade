@@ -2,7 +2,7 @@ import pygame.mixer
 
 pygame.mixer.init()
 
-click_sound = pygame.mixer.Sound("C:\\Users\\fbarb\\Jogos\\JogoArcade\\assets\\button_sound.wav")
+click_sound = pygame.mixer.Sound("assets\\button_sound.wav")
 
 class Button():
 	def __init__(self, image, pos, text_input, font, base_color, hovering_color, play_click_sound=True):
