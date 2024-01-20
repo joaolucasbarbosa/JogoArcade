@@ -1,5 +1,5 @@
 import pygame, sys
-import pygame_menu
+import pygame.mixer
 from button import Button
 from slider import Slider
 
@@ -7,7 +7,8 @@ pygame.init()
 
 pygame.mixer.init()
 
-pygame.mixer.music.load("C:\\Users\\fbarb\\Jogos\\PrimeiroTeste\\assets\\Theme_Sound.mp3")
+pygame.mixer.music.load("C:\\Users\\fbarb\\Jogos\\JogoArcade\\assets\\arcade-171561.wav")
+
 
 is_sound_enabled = True
 is_hard_mode = False 
@@ -15,7 +16,6 @@ is_hard_mode = False
 SCREEN = pygame.display.set_mode((1280, 720))
 pygame.display.set_caption("Menu")
 
-pygame.mixer.music.load("C:\\Users\\fbarb\\Jogos\\PrimeiroTeste\\assets\\Theme_Sound.mp3")
 pygame.mixer.music.set_volume(0.2)  # Ajuste o volume conforme necessário
 pygame.mixer.music.play(-1)  # -1 indica looping infinito
 
@@ -162,15 +162,15 @@ def main_menu():
 
         MENU_MOUSE_POS = pygame.mouse.get_pos()
 
-        MENU_TEXT = get_font(100).render("Game Name", True, "#b68f40")
+        MENU_TEXT = get_font(45).render("Luis Inacio Lula da Silva", True, "#b68f40")
         MENU_RECT = MENU_TEXT.get_rect(center=(640, 100))
 
         PLAY_BUTTON = Button(image=pygame.image.load("assets/Play Rect.png"), pos=(640, 250), 
-                            text_input="PLAY", font=get_font(75), base_color="#d7fcd4", hovering_color="White")
+                            text_input="PLAY", font=get_font(75), base_color="#d7fcd4", hovering_color="Green")
         OPTIONS_BUTTON = Button(image=pygame.image.load("assets/Options Rect.png"), pos=(640, 400), 
-                            text_input="OPTIONS", font=get_font(75), base_color="#d7fcd4", hovering_color="White")
+                            text_input="OPTIONS", font=get_font(75), base_color="#d7fcd4", hovering_color="Green")
         QUIT_BUTTON = Button(image=pygame.image.load("assets/Quit Rect.png"), pos=(640, 550), 
-                            text_input="QUIT", font=get_font(75), base_color="#d7fcd4", hovering_color="White")
+                            text_input="QUIT", font=get_font(75), base_color="#d7fcd4", hovering_color="Green")
 
         SCREEN.blit(MENU_TEXT, MENU_RECT)
 
