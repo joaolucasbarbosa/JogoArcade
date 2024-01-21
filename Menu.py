@@ -24,7 +24,6 @@ pygame.mixer.music.play(-1)
 # Carrega uma imagem de fundo
 BG = pygame.image.load(BACKGROUND_IMAGE)
 
-player_width, player_height = 50, 50
 player_char = pygame.Rect(WIDTH // 2 - player_width // 2,HEIGHT // 2 - player_height // 2,player_width,player_height)
 
 def get_font(size):
@@ -40,37 +39,60 @@ def play(is_hard_mode): #Função do botão PLAY
         SCREEN.fill("black")
         
        
-        
+        ### explica que issooooooooooo
         counter_text = get_font(25).render(f"Score: {counter:03}", True, "White")
         counter_rect = counter_text.get_rect(topleft=(10, 10))
         SCREEN.blit(counter_text, counter_rect)
         
+        ### var para tecla pressionada (permite segurar a tecla)
+        press_key = pygame.key.get_pressed()
         
-        ##Player Render
-        pygame.draw.rect(SCREEN, WHITE, player_char)
-        ##Player movement
-        keys = pygame.key.get_pressed()
-        if keys[pygame.K_w]:
-            player_char.move_ip(0,-1)
-        elif keys[pygame.K_a]:
-            player_char.move_ip(-1,0)
-        elif keys[pygame.K_s]:
-            player_char.move_ip(0,1)
-        elif keys[pygame.K_d]:
-            player_char.move_ip(1,0)
+        ### atualiza o local do player
+        if press_key[pygame.K_w] == True and player[1] > 0:
+            player.move_ip(0, -(player_speed))
+        if press_key[pygame.K_a] == True and player[0] > 0:
+            player.move_ip(-(player_speed), -0)
+        if press_key[pygame.K_s] == True and player[1] < (HEIGHT-player_height):
+            player.move_ip(0, (player_speed))
+        if press_key[pygame.K_d] == True and player[0] < (WIDTH-player_width):
+            player.move_ip((player_speed), 0)
 
+        
         if not paused:
+            
+            ### checa por eventos
             for event in pygame.event.get():
+                
+                ### event para fechar o game
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
+                    
+                ### checa se uma tecla foi apertado (N permite segurar a tecla)
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_ESCAPE:
                         paused = True
                     elif event.type == pygame.KEYDOWN:
                         if event.key == pygame.K_SPACE:
-                            # Incrementa o contador quando a barra de espaço é pressionada
+                            # (TEMPORARIO) Incrementa o contador quando a barra de espaço é pressionada
                             counter += 1 
+                            
+                            ### desenha o projetil na tela baseado nas coords xy do player, 
+                            ### o tiro deve sair no centro e um pouco acima do player 
+                            projeteis.append(pygame.Rect( (player[0] + (round(player_width-projetil_width)/2)),
+                                             player[1] - 20,
+                                             projetil_width, projetil_height))
+        
+            for projetil in projeteis:
+                projetil.y -= 1
+                if projetil.bottom < 0:
+                    projeteis.remove(projetil)
+                
+            ### draw player
+            pygame.draw.rect(SCREEN, player_color, player) 
+        
+            for projetil in projeteis:
+                pygame.draw.rect(SCREEN, projetil_color, projetil)               
                 
 
                         
