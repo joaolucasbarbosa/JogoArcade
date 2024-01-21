@@ -39,7 +39,7 @@ def play(is_hard_mode): #Função do botão PLAY
         SCREEN.fill("black")
         
        
-        ### explica que issooooooooooo
+        ### contador
         counter_text = get_font(25).render(f"Score: {counter:03}", True, "White")
         counter_rect = counter_text.get_rect(topleft=(10, 10))
         SCREEN.blit(counter_text, counter_rect)
@@ -47,18 +47,20 @@ def play(is_hard_mode): #Função do botão PLAY
         ### var para tecla pressionada (permite segurar a tecla)
         press_key = pygame.key.get_pressed()
         
-        ### atualiza o local do player
-        if press_key[pygame.K_w] == True and player[1] > 0:
-            player.move_ip(0, -(player_speed))
-        if press_key[pygame.K_a] == True and player[0] > 0:
-            player.move_ip(-(player_speed), -0)
-        if press_key[pygame.K_s] == True and player[1] < (HEIGHT-player_height):
-            player.move_ip(0, (player_speed))
-        if press_key[pygame.K_d] == True and player[0] < (WIDTH-player_width):
-            player.move_ip((player_speed), 0)
+        
 
         
         if not paused:
+            
+            ### atualiza o local do player
+            if press_key[pygame.K_w] == True and player[1] > 0:
+                player.move_ip(0, -(player_speed))
+            if press_key[pygame.K_a] == True and player[0] > 0:
+                player.move_ip(-(player_speed), -0)
+            if press_key[pygame.K_s] == True and player[1] < (HEIGHT-player_height):
+                player.move_ip(0, (player_speed))
+            if press_key[pygame.K_d] == True and player[0] < (WIDTH-player_width):
+                player.move_ip((player_speed), 0)
             
             ### checa por eventos
             for event in pygame.event.get():
