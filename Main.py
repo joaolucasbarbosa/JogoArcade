@@ -3,6 +3,10 @@ import pygame.mixer
 from button import Button
 from slider import Slider
 
+
+#criar em assets as cores
+white = (255,255,255)
+
 pygame.init()
 
 pygame.mixer.init()
@@ -12,13 +16,19 @@ pygame.mixer.music.load("assets\\arcade-171561.wav")
 is_sound_enabled = True
 is_hard_mode = False 
 
-SCREEN = pygame.display.set_mode((1280, 720))
+width = 1280
+height = 720
+SCREEN = pygame.display.set_mode((width, height))
 pygame.display.set_caption("Menu")
+
 
 pygame.mixer.music.set_volume(0.2)  # Ajuste o volume conforme necessário
 pygame.mixer.music.play(-1)  # -1 indica looping infinito
 
 BG = pygame.image.load("assets/Background.png")
+
+player_width, player_height = 50, 50
+player_char = pygame.Rect(width // 2 - player_width // 2,height // 2 - player_height // 2,player_width,player_height)
 
 def get_font(size): # Returns Press-Start-2P in the desired size
     return pygame.font.Font("assets/font.ttf", size)
@@ -32,9 +42,24 @@ def play(is_hard_mode):
 
         SCREEN.fill("black")
         
+       
+        
         counter_text = get_font(25).render(f"Score: {counter:03}", True, "White")
         counter_rect = counter_text.get_rect(topleft=(10, 10))
         SCREEN.blit(counter_text, counter_rect)
+        
+        
+        keys = pygame.key.get_pressed()
+         
+        pygame.draw.rect(SCREEN, white, player_char)
+        if keys[pygame.K_w]:
+            player_char.move_ip(0,-1)
+        elif keys[pygame.K_a]:
+            player_char.move_ip(-1,0)
+        elif keys[pygame.K_s]:
+            player_char.move_ip(0,1)
+        elif keys[pygame.K_d]:
+            player_char.move_ip(1,0)
 
         if not paused:
             for event in pygame.event.get():
@@ -48,6 +73,9 @@ def play(is_hard_mode):
                         if event.key == pygame.K_SPACE:
                             # Incrementa o contador quando a barra de espaço é pressionada
                             counter += 1 
+                
+
+                        
         else:
             # Se o jogo estiver pausado, exiba a tela de pausa
             pause_overlay = pygame.Surface((1280, 720), pygame.SRCALPHA)
