@@ -49,9 +49,11 @@ def play(is_hard_mode):
         SCREEN.blit(counter_text, counter_rect)
         
         
-        keys = pygame.key.get_pressed()
-         
+        ###Player Render & Movement by:Lucca
+        ##Player Render
         pygame.draw.rect(SCREEN, white, player_char)
+        ##Player movement
+        keys = pygame.key.get_pressed()
         if keys[pygame.K_w]:
             player_char.move_ip(0,-1)
         elif keys[pygame.K_a]:
