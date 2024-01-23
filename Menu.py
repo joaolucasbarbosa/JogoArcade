@@ -26,7 +26,7 @@ PLAY_MOUSE_POS = pygame.mouse.get_pos()
 pygame.display.set_caption("Menu")
 
 # Carrega uma imagem de fundo
-BG = pygame.image.load(BACKGROUND_IMAGE)
+BG = pygame.image.load(BACKGROUND_MENU)
 
 player_char = pygame.Rect(WIDTH // 2 - player_width // 2,HEIGHT // 2 - player_height // 2,player_width,player_height)
 

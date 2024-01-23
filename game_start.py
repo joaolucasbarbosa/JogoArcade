@@ -5,16 +5,24 @@ from button import Button
 
 #####################################
 
+### Carregando background
+bg_play = pygame.image.load(BACKGROUND_PLAY).convert()
+
 def game_start(is_hard_mode):
     
     paused = False
     counter = 0
     
     while True:
+        
+        clock.tick(FPS)
 
         PLAY_MOUSE_POS = pygame.mouse.get_pos()
         
         SCREEN.fill("black")
+        
+        ### background durante o jogo
+        
         
         ### contador
         counter_text = get_font(25).render(f"Score: {counter:03}", True, "White")
@@ -33,7 +41,7 @@ def game_start(is_hard_mode):
         if not paused:
             
             ### atualiza o local do player
-            if press_key[pygame.K_w] == True and player[1] > 0:
+            if press_key[pygame.K_w] == True and player[1] > (HEIGHT/1.5):
                 player.move_ip(0, -(player_speed))
             if press_key[pygame.K_a] == True and player[0] > 0:
                 player.move_ip(-(player_speed), -0)
@@ -66,7 +74,7 @@ def game_start(is_hard_mode):
                                             projetil_width, projetil_height))
         
             for projetil in projeteis:
-                projetil.y -= 1
+                projetil.y -= projetil_speed
                 if projetil.bottom < 0:
                     projeteis.remove(projetil)
             
