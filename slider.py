@@ -15,7 +15,6 @@ class Slider:
         self.is_dragging = False
         self.is_enabled = is_enabled
 
-
     def update(self, surface):
         pygame.draw.rect(surface, (200, 200, 200), self.rect)
         pygame.draw.rect(surface, (100, 100, 100), self.handle_rect)

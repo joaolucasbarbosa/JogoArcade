@@ -25,7 +25,6 @@ is_sound_enabled = True
 is_hard_mode = False 
 player_width, player_height = 50, 50
 
-
 ### setup do player
 player_width = 50
 player_height = 50
